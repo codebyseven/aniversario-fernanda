@@ -1172,3 +1172,40 @@ if (entryBtn) {
     sessionStorage.setItem('jaEntrou', 'sim');
   });
 }
+
+function criarParticulasEntrada() {
+  if (!entryParticles) return;
+  const emojis = ['✨', '⭐', '💫', '🌟', '✦', '✧', '💜'];
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'entry-particle';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.fontSize = (Math.random() * 15 + 12) + 'px';
+    const duracao = Math.random() * 8 + 8;
+    p.style.animationDuration = duracao + 's';
+    p.style.animationDelay = Math.random() * 5 + 's';
+    entryParticles.appendChild(p);
+  }
+}
+criarParticulasEntrada();
+
+// ✨ Brilhos cintilando por todo o overlay
+function criarBrilhinhos() {
+  if (!entrySparkles) return;
+  for (let i = 0; i < 50; i++) {
+    const s = document.createElement('div');
+    s.className = 'entry-sparkle';
+    s.textContent = Math.random() > 0.5 ? '✦' : '✧';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.fontSize = (Math.random() * 14 + 8) + 'px';
+    s.style.animationDelay = Math.random() * 3 + 's';
+    s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    // Cores variadas (roxo, branco, lilás)
+    const cores = ['#ffffff', '#e8d8ff', '#d4b8ff', '#c8a8ff'];
+    s.style.color = cores[Math.floor(Math.random() * cores.length)];
+    entrySparkles.appendChild(s);
+  }
+}
+criarBrilhinhos();

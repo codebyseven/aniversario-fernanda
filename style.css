@@ -866,6 +866,428 @@ body {
 }
 
 /* ============================
+   🌌 OVERLAY DE ENTRADA — RHY E FEYRE
+============================ */
+.entry-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 15%, #4a2d7a 0%, transparent 55%),
+    radial-gradient(circle at 20% 60%, #2d1a4d 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, #1a0f3d 0%, transparent 50%),
+    linear-gradient(180deg, #1a0d2e 0%, #0a0518 100%);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* 🌌 Via Láctea no topo */
+.entry-milkyway {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background:
+    radial-gradient(ellipse 60% 30% at 50% 20%, rgba(180, 130, 230, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 20% at 30% 40%, rgba(200, 150, 255, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 25% at 70% 30%, rgba(160, 120, 220, 0.3) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: milkyway-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes milkyway-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* 🏔️ Montanhas ao fundo */
+.entry-mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(20, 10, 40, 0.6) 40%, rgba(10, 5, 25, 0.95) 100%);
+  clip-path: polygon(
+    0% 100%,
+    0% 60%, 8% 40%, 15% 55%, 25% 25%, 35% 50%,
+    45% 20%, 55% 45%, 65% 30%, 75% 55%, 85% 35%, 95% 50%, 100% 55%, 100% 100%
+  );
+  filter: blur(2px);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.entry-mountains::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 80%, rgba(255, 200, 100, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 60% 85%, rgba(255, 200, 100, 0.2) 0%, transparent 25%),
+    radial-gradient(circle at 80% 78%, rgba(255, 200, 100, 0.15) 0%, transparent 25%);
+  pointer-events: none;
+}
+
+/* ✨ Estrelas cintilando */
+.entry-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.entry-sparkle {
+  position: absolute;
+  font-size: 1rem;
+  pointer-events: none;
+  color: #ffffff;
+  text-shadow:
+    0 0 8px #d4b8ff,
+    0 0 16px #b088e8,
+    0 0 24px #8a5fd0;
+  animation: sparkle-blink 2.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-blink {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Estrelas estáticas de fundo (muitas pequenas) */
+.entry-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1.5px 1.5px at 8% 12%, #ffffff, transparent),
+    radial-gradient(1px 1px at 22% 8%, #e8d8ff, transparent),
+    radial-gradient(2px 2px at 35% 18%, #ffffff, transparent),
+    radial-gradient(1px 1px at 48% 6%, #d4b8ff, transparent),
+    radial-gradient(1.5px 1.5px at 62% 15%, #ffffff, transparent),
+    radial-gradient(1px 1px at 75% 10%, #e8d8ff, transparent),
+    radial-gradient(2px 2px at 88% 22%, #ffffff, transparent),
+    radial-gradient(1px 1px at 15% 35%, #d4b8ff, transparent),
+    radial-gradient(1.5px 1.5px at 42% 30%, #ffffff, transparent),
+    radial-gradient(1px 1px at 68% 38%, #e8d8ff, transparent),
+    radial-gradient(1px 1px at 92% 40%, #ffffff, transparent),
+    radial-gradient(1.5px 1.5px at 5% 50%, #d4b8ff, transparent),
+    radial-gradient(1px 1px at 55% 55%, #ffffff, transparent),
+    radial-gradient(2px 2px at 82% 60%, #e8d8ff, transparent),
+    radial-gradient(1px 1px at 30% 72%, #ffffff, transparent);
+  background-size: 100% 100%;
+  animation: stars-drift 40s linear infinite;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes stars-drift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-30px, 20px); }
+}
+
+.entry-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.entry-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 700px;
+  animation: entry-appear 1.5s ease-out;
+}
+
+@keyframes entry-appear {
+  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 🖼️ IMAGEM DO CASAL */
+.entry-couple {
+  position: relative;
+  width: 180px;
+  height: 240px;
+  margin: 0 auto 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entry-couple-glow {
+  position: absolute;
+  inset: -25px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 130, 230, 0.5) 0%, rgba(140, 90, 200, 0.2) 40%, transparent 70%);
+  animation: couple-glow-pulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes couple-glow-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.entry-couple-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+  z-index: 2;
+  filter:
+    drop-shadow(0 0 25px rgba(180, 130, 230, 0.7))
+    drop-shadow(0 0 50px rgba(140, 90, 200, 0.4));
+  animation: couple-float 4s ease-in-out infinite;
+}
+
+@keyframes couple-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.entry-couple-fallback {
+  display: flex;
+  gap: 1rem;
+  font-size: 4rem;
+  z-index: 2;
+  filter: drop-shadow(0 0 20px #b088e8);
+  animation: couple-float 4s ease-in-out infinite;
+}
+
+/* 💜 Nome da elfa */
+.entry-elf-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  color: #d4b8ff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  text-shadow:
+    0 0 15px rgba(180, 130, 230, 0.9),
+    0 0 30px rgba(140, 90, 200, 0.6);
+}
+
+/* 🪄 FEITIÇO */
+.entry-spell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(30, 15, 60, 0.7);
+  border: 1px solid rgba(180, 130, 230, 0.5);
+  border-radius: 50px;
+  padding: 1rem 1.8rem;
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 30px rgba(180, 130, 230, 0.3),
+    inset 0 0 25px rgba(90, 40, 160, 0.4);
+  animation: spell-glow 3s ease-in-out infinite;
+}
+
+@keyframes spell-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 30px rgba(180, 130, 230, 0.3),
+      inset 0 0 25px rgba(90, 40, 160, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 55px rgba(200, 150, 255, 0.6),
+      inset 0 0 35px rgba(120, 60, 200, 0.5);
+  }
+}
+
+.entry-spell-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  animation: spell-icon-swing 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px #d4b8ff);
+}
+
+@keyframes spell-icon-swing {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+.entry-spell-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #e8d8ff;
+  line-height: 1.6;
+  text-align: left;
+  text-shadow: 0 0 10px rgba(200, 160, 255, 0.5);
+}
+
+.entry-spell-text em {
+  color: #ffffff;
+}
+
+/* 💌 Carta da elfa */
+.entry-letter {
+  background: rgba(20, 10, 45, 0.8);
+  border: 1px solid rgba(180, 130, 230, 0.4);
+  border-radius: 15px;
+  padding: 2rem 2.2rem;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 40px rgba(140, 90, 200, 0.25),
+    inset 0 0 40px rgba(60, 30, 120, 0.3);
+}
+
+.entry-letter-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #d4c4f0;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+.entry-letter-line:last-child {
+  margin-bottom: 0;
+}
+
+.entry-letter-line.highlight {
+  color: #e8d8ff;
+  font-size: 1.3rem;
+  margin: 1.2rem 0;
+  padding: 1rem 0;
+  border-top: 1px dashed rgba(180, 130, 230, 0.4);
+  border-bottom: 1px dashed rgba(180, 130, 230, 0.4);
+}
+
+.entry-letter-line strong {
+  color: #d4b8ff;
+  font-style: normal;
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(180, 130, 230, 0.9);
+}
+
+/* 💜 Botão */
+.entry-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, #5a2d8a, #b088e8, #5a2d8a);
+  color: #ffffff;
+  border: 2px solid #e8d8ff;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 0 40px rgba(180, 130, 230, 0.8);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  animation: entry-pulse-btn 2s ease-in-out infinite;
+}
+
+.entry-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 80px rgba(200, 150, 255, 1);
+}
+
+.entry-btn:active {
+  transform: scale(1.02);
+}
+
+.entry-btn-icon {
+  font-size: 1.4rem;
+  display: inline-block;
+  animation: entry-icon-twinkle 2s ease-in-out infinite;
+}
+
+@keyframes entry-pulse-btn {
+  0%, 100% { box-shadow: 0 0 40px rgba(180, 130, 230, 0.8); }
+  50% { box-shadow: 0 0 75px rgba(200, 150, 255, 1); }
+}
+
+@keyframes entry-icon-twinkle {
+  0%, 100% { transform: scale(1) rotate(-10deg); opacity: 1; }
+  50% { transform: scale(1.2) rotate(10deg); opacity: 0.8; }
+}
+
+.entry-hint {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #b8a0d8;
+  font-style: italic;
+  opacity: 0.8;
+  animation: entry-fade-hint 3s ease-in-out infinite;
+}
+
+@keyframes entry-fade-hint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* 🍃 Partículas caindo */
+.entry-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.entry-particle {
+  position: absolute;
+  top: -50px;
+  font-size: 1.4rem;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 10px rgba(180, 130, 230, 0.7));
+  animation: entry-particle-fall linear infinite;
+}
+
+@keyframes entry-particle-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(55vh) translateX(40px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .entry-couple { width: 140px; height: 190px; }
+  .entry-elf-name { font-size: 0.9rem; letter-spacing: 2px; }
+  .entry-spell { padding: 0.8rem 1.2rem; gap: 0.6rem; }
+  .entry-spell-text { font-size: 1rem; }
+  .entry-spell-icon { font-size: 1.4rem; }
+  .entry-letter { padding: 1.5rem 1.2rem; }
+  .entry-letter-line { font-size: 1rem; }
+  .entry-letter-line.highlight { font-size: 1.1rem; }
+  .entry-btn { font-size: 0.95rem; padding: 1rem 2rem; }
+}
+
+
+/* ============================
    RESPONSIVO
 ============================ */
 @media (max-width: 600px) {

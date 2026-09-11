@@ -10,25 +10,62 @@
 <body>
 
 <!-- 🎬 OVERLAY DE ENTRADA -->
+   <!-- 🌌 OVERLAY DE ENTRADA — VERSÃO RHY E FEYRE -->
   <div class="entry-overlay" id="entryOverlay">
+
+    <!-- ✨ Estrelas piscando -->
+    <div class="entry-sparkles" id="entrySparkles"></div>
+
+    <!-- 🌌 Via Láctea -->
+    <div class="entry-milkyway"></div>
+
+    <!-- 🏔️ Montanhas ao fundo -->
+    <div class="entry-mountains"></div>
+
+    <!-- 🍃 Partículas caindo -->
+    <div class="entry-particles" id="entryParticles"></div>
+
     <div class="entry-content">
-      <div class="entry-symbols">
-        <span>🍃</span>
-        <span>✨</span>
-        <span>📖</span>
-        <span>🌿</span>
-        <span>🔮</span>
+
+      <!-- 🖼️ IMAGEM DO CASAL -->
+      <div class="entry-couple">
+        <div class="entry-couple-glow"></div>
+        <img src="fotos/casal.png" alt="O casal mágico" class="entry-couple-img" onerror="this.style.display='none'; this.parentElement.querySelector('.entry-couple-fallback').style.display='flex';">
+        <div class="entry-couple-fallback" style="display:none;">
+          <span>🧝‍♀️</span>
+          <span>🦇</span>
+        </div>
       </div>
-      <p class="entry-sub">✦ Uma história mágica para ✦</p>
-      <h1 class="entry-title">Fernanda</h1>
-      <p class="entry-quote">"Há amizades que nascem nos livros — e a nossa nasceu na vida real."</p>
+
+      <!-- 💜 Nome da elfa -->
+      <p class="entry-elf-name">✧ Ayla, a Elfa Mensageira ✧</p>
+
+      <!-- 🪄 FEITIÇO PERSONALIZADO -->
+      <div class="entry-spell">
+        <span class="entry-spell-icon">🪄</span>
+        <p class="entry-spell-text">
+          <em>"Que as estrelas te encontrem, que a magia te guie, e que hoje seja o começo do ano mais bonito da sua vida."</em>
+        </p>
+      </div>
+
+      <!-- 💌 Carta da elfa -->
+      <div class="entry-letter">
+        <p class="entry-letter-line">"Olá, viajante..."</p>
+        <p class="entry-letter-line">"Eu sou Ayla, guardiã das histórias esquecidas."</p>
+        <p class="entry-letter-line highlight">
+          "Fui enviada por <strong>Carol</strong> — ela preparou uma surpresa mágica só para você."
+        </p>
+        <p class="entry-letter-line">"Atravesse o portal e descubra. ✨"</p>
+      </div>
+
+      <!-- 💜 Botão -->
       <button class="entry-btn" id="entryBtn">
-        <span class="entry-btn-icon">🌿</span>
+        <span class="entry-btn-icon">✨</span>
         <span>Entrar no mundo mágico</span>
       </button>
+
       <p class="entry-hint">🔊 Melhor com o som ligado</p>
     </div>
-    <div class="entry-particles" id="entryParticles"></div>
   </div>
 
 
