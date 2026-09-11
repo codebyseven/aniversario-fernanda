@@ -45,13 +45,40 @@ for (let i = 0; i < 10; i++) {
 }
 
 // ============================
-// LUZ DO MOUSE
+// ✨ LUZ QUE SEGUE O MOUSE
 // ============================
 const cursorGlow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', (e) => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top = e.clientY + 'px';
-});
+
+if (cursorGlow) {
+  let mouseInside = false;
+
+  // Ativa a luz quando o mouse entra na página
+  document.addEventListener('mouseenter', () => {
+    mouseInside = true;
+    cursorGlow.classList.add('active');
+  });
+
+  // Desativa quando sai
+  document.addEventListener('mouseleave', () => {
+    mouseInside = false;
+    cursorGlow.classList.remove('active');
+  });
+
+  // Segue o mouse
+  document.addEventListener('mousemove', (e) => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top = e.clientY + 'px';
+    if (!mouseInside) {
+      cursorGlow.classList.add('active');
+      mouseInside = true;
+    }
+  });
+
+  // Remove no celular
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    cursorGlow.style.display = 'none';
+  }
+}
 
 // ============================
 // 🍃 SOM DE FLORESTA
