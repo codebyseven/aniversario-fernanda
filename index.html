@@ -171,6 +171,96 @@
     </div>
   </section>
 
+<!-- 🎨 CRIAÇÃO DE PERSONAGEM -->
+  <section class="chapter creator-section">
+    <div class="chapter-card big-card">
+      <div class="chapter-decor-top"></div>
+      <span class="chapter-icon">🎨</span>
+      <h2>Crie sua Personagem Mágica</h2>
+      <p class="chapter-text">
+        Se você fosse uma personagem de conto de fadas, como seria?
+        <strong>Monte a sua versão mágica!</strong>
+      </p>
+
+      <div class="creator-stage">
+        <div class="creator-bg bg-forest" id="creatorBg">
+          <div class="creator-character" id="creatorCharacter">
+            <div class="char-layer char-bg-aura" id="charAura">✦</div>
+            <div class="char-layer char-hair" id="charHair">👩‍🦰</div>
+            <div class="char-layer char-body" id="charBody">👗</div>
+            <div class="char-layer char-accessory" id="charAccessory">👑</div>
+          </div>
+          <div class="creator-sparkles" id="creatorSparkles"></div>
+        </div>
+      </div>
+
+      <div class="creator-controls">
+        <div class="control-group">
+          <label class="control-label">💇 Cabelo</label>
+          <div class="control-options" data-target="hair">
+            <button class="opt-btn" data-value="👩‍🦰">Ruivo</button>
+            <button class="opt-btn" data-value="👩‍🦱">Cacheado</button>
+            <button class="opt-btn" data-value="👱‍♀️">Loiro</button>
+            <button class="opt-btn" data-value="👩‍🦳">Branco</button>
+            <button class="opt-btn" data-value="👩‍🦲">Curto</button>
+            <button class="opt-btn" data-value="🧑‍🦰">Moderno</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">👗 Roupa</label>
+          <div class="control-options" data-target="body">
+            <button class="opt-btn" data-value="👗">Vestido</button>
+            <button class="opt-btn" data-value="👚">Blusa</button>
+            <button class="opt-btn" data-value="🧥">Casaco</button>
+            <button class="opt-btn" data-value="👘">Quimono</button>
+            <button class="opt-btn" data-value="🥻">Sari</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">👑 Acessório</label>
+          <div class="control-options" data-target="accessory">
+            <button class="opt-btn" data-value="👑">Coroa</button>
+            <button class="opt-btn" data-value="🎩">Cartola</button>
+            <button class="opt-btn" data-value="🌸">Flor</button>
+            <button class="opt-btn" data-value="🎀">Laço</button>
+            <button class="opt-btn" data-value="🧙‍♀️">Chapéu</button>
+            <button class="opt-btn" data-value="✨">Auréola</button>
+            <button class="opt-btn" data-value="—">Nenhum</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">🌈 Fundo</label>
+          <div class="control-options" data-target="bg">
+            <button class="bg-btn" data-value="bg-forest">🌲 Floresta</button>
+            <button class="bg-btn" data-value="bg-sky">☁️ Céu</button>
+            <button class="bg-btn" data-value="bg-night">🌙 Noite</button>
+            <button class="bg-btn" data-value="bg-castle">🏰 Castelo</button>
+            <button class="bg-btn" data-value="bg-rose">🌹 Rosas</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="creator-actions">
+        <button class="creator-save" id="creatorSave">✨ Pronto!</button>
+        <button class="creator-reset" id="creatorReset">🔄 Recomeçar</button>
+      </div>
+
+      <p class="creator-message" id="creatorMessage"></p>
+
+      <p class="blank">✍️ [Escreva o que essa personagem representa pra você]</p>
+      <div class="chapter-decor-bottom"></div>
+    </div>
+  </section>
+
+
+
+
+
+
+  
   <!-- 🎮 MINI-JOGO -->
   <section class="game-section">
     <h2 class="section-title">
