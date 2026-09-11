@@ -134,7 +134,7 @@ function tocarFloresta() {
     soundPlaying = true;
     musicToggle.classList.add('playing');
     musicToggle.textContent = '🍃';
-    fadeIn(forestAmbient, 0.25, 2500); // ← volume final: 0.25
+    fadeIn(forestAmbient, 0.60, 2500); // ← volume final: 0.60
   }).catch(() => {
     console.warn('Som de floresta falhou. Coloque o arquivo floresta.mp3 na pasta.');
   });
