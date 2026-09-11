@@ -27,13 +27,28 @@
 
     <div class="entry-content">
 
-      <!-- 🖼️ IMAGEM DO CASAL -->
+       <!-- 🖼️ IMAGEM DO CASAL COM MOLDURA -->
       <div class="entry-couple">
         <div class="entry-couple-glow"></div>
-        <img src="fotos/casal.png" alt="O casal mágico" class="entry-couple-img" onerror="this.style.display='none'; this.parentElement.querySelector('.entry-couple-fallback').style.display='flex';">
-        <div class="entry-couple-fallback" style="display:none;">
-          <span>🧝‍♀️</span>
-          <span>🦇</span>
+
+        <div class="entry-frame">
+          <!-- Ornamentos dos cantos -->
+          <div class="frame-corner frame-corner-tl"></div>
+          <div class="frame-corner frame-corner-tr"></div>
+          <div class="frame-corner frame-corner-bl"></div>
+          <div class="frame-corner frame-corner-br"></div>
+
+          <!-- Ornamento superior -->
+          <div class="frame-ornament-top">✦</div>
+
+          <!-- Imagem -->
+          <img src="fotos/casal.png" alt="O casal mágico" class="entry-couple-img" onerror="this.style.display='none'; this.parentElement.querySelector('.entry-couple-fallback').style.display='flex';">
+
+          <!-- Fallback (se a imagem não carregar) -->
+          <div class="entry-couple-fallback" style="display:none;">
+            <span>🧝‍♀️</span>
+            <span>🦇</span>
+          </div>
         </div>
       </div>
 
