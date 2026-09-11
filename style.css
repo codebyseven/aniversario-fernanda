@@ -860,3 +860,17 @@ body {
   .game-hud-value { font-size: 1.2rem; padding: 0.2rem 0.7rem; }
   .cursor-glow { display: none; }
 }
+
+/* ============================
+   CARTA — TEXTO ESCRITO
+============================ */
+.letter .blank,
+.letter .blank.big {
+  color: #3a2a1f;
+  background: rgba(201, 181, 106, 0.12);
+  border: 1px dashed #c9a227;
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.85;
+  font-family: 'Cormorant Garamond', serif;
+}
