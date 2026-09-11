@@ -52,17 +52,39 @@ body {
   100% { transform: translateY(105vh) translateX(-30px) rotate(360deg); opacity: 0; }
 }
 
+/* ============================
+   ✨ LUZ QUE SEGUE O MOUSE
+============================ */
 .cursor-glow {
   position: fixed;
-  width: 400px;
-  height: 400px;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 220, 100, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 246, 194, 0.35) 0%,
+    rgba(255, 220, 100, 0.15) 25%,
+    transparent 65%
+  );
   pointer-events: none;
-  z-index: 2;
+  z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s;
+  transition: opacity 0.4s;
   mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.cursor-glow.active {
+  opacity: 1;
+}
+
+/* Esconde em celular (não faz sentido) */
+@media (max-width: 600px) {
+  .cursor-glow {
+    display: none;
+  }
 }
 
 /* ============================
