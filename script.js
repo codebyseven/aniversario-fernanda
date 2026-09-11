@@ -54,122 +54,87 @@ document.addEventListener('mousemove', (e) => {
 });
 
 // ============================
-// 🎵 MÚSICA DE FUNDO (música + floresta)
+// 🍃 SOM DE FLORESTA
 // ============================
-const bgMusic = document.getElementById('bgMusic');
 const forestAmbient = document.getElementById('forestAmbient');
 const musicToggle = document.getElementById('musicToggle');
 
-let musicPlaying = false;
-let fadeMusica = null;
+let soundPlaying = false;
 let fadeFloresta = null;
 
-const VOLUME_MUSICA = 0.25;
-const VOLUME_FLORESTA = 0.12;
-
-bgMusic.volume = 0;
 forestAmbient.volume = 0;
 
-// Detecta se o áudio falhou
-bgMusic.addEventListener('error', () => console.warn('Música falhou ao carregar'));
-forestAmbient.addEventListener('error', () => console.warn('Floresta falhou ao carregar'));
-
-function fadeIn(audioEl, volumeAlvo, duracao, tipo) {
-  if (tipo === 'musica' && fadeMusica) clearInterval(fadeMusica);
-  if (tipo === 'floresta' && fadeFloresta) clearInterval(fadeFloresta);
-
+// Fade in suave do volume
+function fadeIn(audioEl, volumeAlvo, duracao) {
+  if (fadeFloresta) clearInterval(fadeFloresta);
   const passos = 40;
   const incremento = volumeAlvo / passos;
   let atual = 0;
-
-  const intervalo = setInterval(() => {
+  fadeFloresta = setInterval(() => {
     atual += incremento;
     if (atual >= volumeAlvo) {
       audioEl.volume = volumeAlvo;
-      clearInterval(intervalo);
+      clearInterval(fadeFloresta);
+      fadeFloresta = null;
     } else {
       audioEl.volume = atual;
     }
   }, duracao / passos);
-
-  if (tipo === 'musica') fadeMusica = intervalo;
-  if (tipo === 'floresta') fadeFloresta = intervalo;
 }
 
+// Fade out suave
 function fadeOut(audioEl, duracao) {
+  if (fadeFloresta) clearInterval(fadeFloresta);
   const passos = 30;
   const volumeInicial = audioEl.volume;
   const decremento = volumeInicial / passos;
-
-  const intervalo = setInterval(() => {
+  fadeFloresta = setInterval(() => {
     if (audioEl.volume - decremento <= 0) {
       audioEl.volume = 0;
       audioEl.pause();
-      clearInterval(intervalo);
+      clearInterval(fadeFloresta);
+      fadeFloresta = null;
     } else {
       audioEl.volume -= decremento;
     }
   }, duracao / passos);
 }
 
-function tocarTudo() {
-  bgMusic.volume = 0;
+// Tocar som de floresta
+function tocarFloresta() {
   forestAmbient.volume = 0;
-
-  // Toca música com retry
-  const p1 = bgMusic.play().catch(() => {
-    console.warn('Música falhou, tentando novamente...');
-    bgMusic.load();
-    return bgMusic.play().catch(() => {});
-  });
-
-  // Floresta em paralelo (não trava se falhar)
-  forestAmbient.play().catch(() => {
-    console.warn('Som de floresta falhou — continuando só com música');
-  });
-
-  p1.then(() => {
-    musicPlaying = true;
+  forestAmbient.play().then(() => {
+    soundPlaying = true;
     musicToggle.classList.add('playing');
-    musicToggle.textContent = '🎶';
-    fadeIn(bgMusic, VOLUME_MUSICA, 3000, 'musica');
-    setTimeout(() => fadeIn(forestAmbient, VOLUME_FLORESTA, 2000, 'floresta'), 800);
+    musicToggle.textContent = '🍃';
+    fadeIn(forestAmbient, 0.25, 2500); // ← volume final: 0.25
   }).catch(() => {
-    bgMusic.play().then(() => {
-      musicPlaying = true;
-      musicToggle.classList.add('playing');
-      musicToggle.textContent = '🎶';
-      fadeIn(bgMusic, VOLUME_MUSICA, 3000, 'musica');
-    }).catch((err) => {
-      console.error('Erro ao tocar música:', err);
-      musicToggle.textContent = '🔇';
-    });
+    console.warn('Som de floresta falhou. Coloque o arquivo floresta.mp3 na pasta.');
   });
 }
 
-function pausarTudo() {
-  fadeOut(bgMusic, 1000);
-  setTimeout(() => fadeOut(forestAmbient, 800), 200);
-  musicPlaying = false;
+// Pausar som de floresta
+function pausarFloresta() {
+  fadeOut(forestAmbient, 1000);
+  soundPlaying = false;
   musicToggle.classList.remove('playing');
   musicToggle.textContent = '🔇';
 }
 
-document.body.addEventListener('click', function iniciarMusica() {
-  if (!musicPlaying) tocarTudo();
-  document.body.removeEventListener('click', iniciarMusica);
+// Inicia automaticamente após o primeiro clique do usuário
+document.body.addEventListener('click', function iniciarSom() {
+  if (!soundPlaying) tocarFloresta();
+  document.body.removeEventListener('click', iniciarSom);
 }, { once: true });
 
+// Botão de ligar/desligar
 musicToggle.addEventListener('click', (e) => {
   e.stopPropagation();
-  if (musicPlaying) {
-    pausarTudo();
+  if (soundPlaying) {
+    pausarFloresta();
   } else {
-    if (bgMusic.paused) {
-      bgMusic.currentTime = 0;
-      forestAmbient.currentTime = 0;
-    }
-    tocarTudo();
+    if (forestAmbient.paused) forestAmbient.currentTime = 0;
+    tocarFloresta();
   }
 });
 
@@ -177,13 +142,11 @@ musicToggle.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.code === 'ArrowRight' && e.shiftKey) {
     e.preventDefault();
-    bgMusic.volume = Math.min(1, bgMusic.volume + 0.05);
-    forestAmbient.volume = Math.min(1, forestAmbient.volume + 0.03);
+    forestAmbient.volume = Math.min(1, forestAmbient.volume + 0.05);
   }
   if (e.code === 'ArrowLeft' && e.shiftKey) {
     e.preventDefault();
-    bgMusic.volume = Math.max(0, bgMusic.volume - 0.05);
-    forestAmbient.volume = Math.max(0, forestAmbient.volume - 0.03);
+    forestAmbient.volume = Math.max(0, forestAmbient.volume - 0.05);
   }
 });
 
