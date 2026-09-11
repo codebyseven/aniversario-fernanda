@@ -641,8 +641,8 @@ highScoreEl.textContent = gameHighScore;
 const dino = {
   x: 90,
   y: 0,
-  width: 60,
-  height: 60,
+  width: 120,
+  height: 120,
   vy: 0,
   gravity: 0.4,
   jumpForce: -10.5,
@@ -762,6 +762,10 @@ function desenharFundo() {
   ctx.stroke();
 }
 
+// Carrega a imagem uma vez
+const dinoImg = new Image();
+dinoImg.src = 'fotos/personagem.png';
+
 function desenharDino() {
   ctx.save();
   ctx.shadowColor = '#ffe97a';
@@ -770,12 +774,25 @@ function desenharDino() {
     ctx.shadowColor = '#ffb8e0';
     ctx.shadowBlur = 35;
   }
-  ctx.font = '56px serif';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(dino.emoji, dino.x + dino.width / 2, dino.y + dino.height / 2);
+
+  if (dinoImg.complete && dinoImg.naturalWidth > 0) {
+    // Desenha a imagem
+    ctx.drawImage(
+      dinoImg,
+      dino.x, dino.y,
+      dino.width, dino.height
+    );
+  } else {
+    // Fallback: emoji enquanto a imagem carrega
+    ctx.font = '56px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(dino.emoji, dino.x + dino.width / 2, dino.y + dino.height / 2);
+  }
+
   ctx.restore();
 }
+
 
 function desenharObstaculos() {
   obstaculos.forEach((obs) => {
