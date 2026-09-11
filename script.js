@@ -1043,3 +1043,157 @@ overlay.addEventListener('touchstart', (e) => {
 dino.y = chaoY - dino.height;
 desenharFundo();
 desenharDino();
+
+// ============================
+// 🎨 CRIAÇÃO DE PERSONAGEM
+// ============================
+const creatorCharacter = {
+  hair: '👩‍🦰',
+  body: '👗',
+  accessory: '👑',
+  bg: 'bg-forest'
+};
+
+// Carrega escolhas salvas
+const savedChar = localStorage.getItem('personagemMagica');
+if (savedChar) {
+  try {
+    Object.assign(creatorCharacter, JSON.parse(savedChar));
+  } catch (e) {}
+}
+
+const charHair = document.getElementById('charHair');
+const charBody = document.getElementById('charBody');
+const charAccessory = document.getElementById('charAccessory');
+const creatorBg = document.getElementById('creatorBg');
+const creatorSparkles = document.getElementById('creatorSparkles');
+const creatorMessage = document.getElementById('creatorMessage');
+
+// Aplica valores iniciais
+function aplicarPersonagem() {
+  charHair.textContent = creatorCharacter.hair;
+  charBody.textContent = creatorCharacter.body;
+  charAccessory.textContent = creatorCharacter.accessory;
+  charAccessory.style.display = creatorCharacter.accessory === '—' ? 'none' : 'block';
+  creatorBg.className = 'creator-bg ' + creatorCharacter.bg;
+}
+aplicarPersonagem();
+
+// Marca botões já selecionados
+function marcarSelecionados() {
+  document.querySelectorAll('.opt-btn').forEach((btn) => {
+    const target = btn.parentElement.dataset.target;
+    if (creatorCharacter[target] === btn.dataset.value) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+  document.querySelectorAll('.bg-btn').forEach((btn) => {
+    if (creatorCharacter.bg === btn.dataset.value) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+marcarSelecionados();
+
+// Cria faísca mágica ao trocar
+function criarFaiscaPersonagem() {
+  const emojis = ['✨', '⭐', '💫', '🌟', '✦'];
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const s = document.createElement('div');
+      s.className = 'sparkle-dot';
+      s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      s.style.left = (30 + Math.random() * 40) + '%';
+      s.style.top = (30 + Math.random() * 40) + '%';
+      s.style.fontSize = (Math.random() * 12 + 12) + 'px';
+      creatorSparkles.appendChild(s);
+      setTimeout(() => s.remove(), 2100);
+    }, i * 60);
+  }
+}
+
+function fazerBump(el) {
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+  setTimeout(() => el.classList.remove('bump'), 600);
+}
+
+// Botões de cabelo / roupa / acessório
+document.querySelectorAll('.opt-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const target = btn.parentElement.dataset.target;
+    creatorCharacter[target] = btn.dataset.value;
+
+    if (target === 'hair') { charHair.textContent = btn.dataset.value; fazerBump(charHair); }
+    if (target === 'body') { charBody.textContent = btn.dataset.value; fazerBump(charBody); }
+    if (target === 'accessory') {
+      charAccessory.textContent = btn.dataset.value;
+      charAccessory.style.display = btn.dataset.value === '—' ? 'none' : 'block';
+      if (btn.dataset.value !== '—') fazerBump(charAccessory);
+    }
+
+    btn.parentElement.querySelectorAll('.opt-btn').forEach((b) => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    criarFaiscaPersonagem();
+    localStorage.setItem('personagemMagica', JSON.stringify(creatorCharacter));
+  });
+});
+
+// Botões de fundo
+document.querySelectorAll('.bg-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    creatorCharacter.bg = btn.dataset.value;
+    creatorBg.className = 'creator-bg ' + btn.dataset.value;
+
+    document.querySelectorAll('.bg-btn').forEach((b) => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    criarFaiscaPersonagem();
+    localStorage.setItem('personagemMagica', JSON.stringify(creatorCharacter));
+  });
+});
+
+// Botão "Pronto!"
+const creatorSave = document.getElementById('creatorSave');
+creatorSave.addEventListener('click', () => {
+  const mensagens = [
+    '✨ Pronto! Sua personagem mágica ficou linda — assim como você, Fernanda!',
+    '🌟 A Fernanda dos contos de fadas seria exatamente assim!',
+    '💛 Perfeita! Essa é a Fernanda que eu conheço: única e mágica.',
+    '🌿 Que personagem encantadora! Combina com você.',
+    '👑 Uma verdadeira rainha das histórias mágicas!'
+  ];
+  const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+  creatorMessage.textContent = msg;
+  creatorMessage.classList.remove('show');
+  void creatorMessage.offsetWidth;
+  creatorMessage.classList.add('show');
+
+  for (let i = 0; i < 20; i++) setTimeout(criarFaiscaPersonagem, i * 50);
+});
+
+// Botão "Recomeçar"
+const creatorReset = document.getElementById('creatorReset');
+creatorReset.addEventListener('click', () => {
+  creatorCharacter.hair = '👩‍🦰';
+  creatorCharacter.body = '👗';
+  creatorCharacter.accessory = '👑';
+  creatorCharacter.bg = 'bg-forest';
+
+  aplicarPersonagem();
+  marcarSelecionados();
+  criarFaiscaPersonagem();
+
+  creatorMessage.textContent = '🔄 Personagem reiniciada!';
+  creatorMessage.classList.remove('show');
+  void creatorMessage.offsetWidth;
+  creatorMessage.classList.add('show');
+
+  localStorage.setItem('personagemMagica', JSON.stringify(creatorCharacter));
+});
