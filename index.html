@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Para a Fernanda ✨</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Estrelas + folhas + símbolos caindo -->
+  <div class="magic-layer" id="magicLayer"></div>
+
+  <!-- Luz ambiente que segue o mouse -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Botão de música -->
+  <button id="musicToggle" class="music-btn" title="Ligar/Desligar música">🎵</button>
+
+  <!-- 🎵 MÚSICA DE FUNDO — LINKS ESTÁVEIS -->
+  <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="forestAmbient" loop preload="auto" crossorigin="anonymous">
+    <source src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bird_singing.ogg" type="audio/ogg">
+  </audio>
+
+  <!-- ✨ ABERTURA -->
+  <section class="hero">
+    <div class="hero-stars"></div>
+    <div class="hero-content">
+      <div class="hero-symbols">
+        <span>🍃</span>
+        <span>✨</span>
+        <span>📖</span>
+        <span>🧝‍♀️</span>
+        <span>🌿</span>
+        <span>🔮</span>
+      </div>
+      <p class="hero-sub">✦ Um conto mágico para ✦</p>
+      <h1 class="hero-title">Fernanda</h1>
+      <p class="hero-quote">"Há amizades que nascem nos livros — e a nossa nasceu na vida real."</p>
+      <div class="scroll-hint">▼ role para descobrir ▼</div>
+    </div>
+  </section>
+
+  <!-- 🧝 A ELFA -->
+  <section class="chapter">
+    <div class="chapter-card">
+      <div class="chapter-decor-top"></div>
+      <span class="chapter-icon">🧝‍♀️</span>
+      <h2>Uma Elfa entre Nós</h2>
+      <p class="chapter-text">
+        Se este mundo tivesse elfos de verdade, você seria uma delas, Fernanda.
+        Com a sabedoria das florestas antigas, a doçura das fontes cristalinas
+        e a luz que só as criaturas mais raras carregam.
+      </p>
+      <p class="blank">✍️ [Escreva aqui o que torna a Fernanda única]</p>
+      <div class="chapter-decor-bottom"></div>
+    </div>
+  </section>
+
+  <!-- 📚 LIVROS -->
+  <section class="chapter dark">
+    <div class="chapter-card">
+      <div class="chapter-decor-top"></div>
+      <span class="chapter-icon">📚</span>
+      <h2>A Biblioteca dela</h2>
+      <p class="chapter-text">
+        Algumas pessoas não leem livros — elas <em>são</em> livros.
+        E você, Fernanda, é daquelas obras raras que a gente relê
+        a vida inteira e nunca termina de descobrir.
+      </p>
+      <div class="books-line">
+        <span class="book-emoji">📕</span>
+        <span class="book-emoji">📗</span>
+        <span class="book-emoji">📘</span>
+        <span class="book-emoji">📙</span>
+        <span class="book-emoji">📖</span>
+      </div>
+      <p class="blank">✍️ [Escreva sobre o que a amizade dela significa para você]</p>
+      <div class="chapter-decor-bottom"></div>
+    </div>
+  </section>
+
+  <!-- 📸 GALERIA -->
+  <section class="gallery-section">
+    <h2 class="section-title">
+      <span class="title-ornament">✦</span>
+      A Magia em Forma de Pessoa
+      <span class="title-ornament">✦</span>
+    </h2>
+    <div class="gallery">
+      <div class="photo-frame">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <img src="fotos/fernanda1.jpg" alt="Fernanda">
+        <p class="caption">✍️ [Legenda 1]</p>
+      </div>
+      <div class="photo-frame">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <img src="fotos/fernanda2.jpg" alt="Fernanda">
+        <p class="caption">✍️ [Legenda 2]</p>
+      </div>
+      <div class="photo-frame">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <img src="fotos/fernanda3.jpg" alt="Fernanda">
+        <p class="caption">✍️ [Legenda 3]</p>
+      </div>
+      <div class="photo-frame">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <img src="fotos/fernanda4.jpg" alt="Fernanda">
+        <p class="caption">✍️ [Legenda 4]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🌿 ENCANTAMENTOS -->
+  <section class="chapter dark">
+    <div class="chapter-card">
+      <div class="chapter-decor-top"></div>
+      <span class="chapter-icon">🌿</span>
+      <h2>Encantamentos que Você Me Ensinou</h2>
+      <div class="spells-list">
+        <div class="spell">
+          <span class="spell-icon">✨</span>
+          <div>
+            <span class="spell-name">Feitiço da Risa</span>
+            <p class="spell-desc">Você transforma qualquer dia comum em algo inesquecível.</p>
+          </div>
+        </div>
+        <div class="spell">
+          <span class="spell-icon">🍃</span>
+          <div>
+            <span class="spell-name">Magia da Calma</span>
+            <p class="spell-desc">Sua presença acalma tempestades que nem sabíamos que existiam.</p>
+          </div>
+        </div>
+        <div class="spell">
+          <span class="spell-icon">📖</span>
+          <div>
+            <span class="spell-name">Encanto das Histórias</span>
+            <p class="spell-desc">Toda conversa com você vira um capítulo que a gente quer reler.</p>
+          </div>
+        </div>
+        <div class="spell">
+          <span class="spell-icon">💛</span>
+          <div>
+            <span class="spell-name">Feitiço do Amor</span>
+            <p class="spell-desc">Amizade de verdade: o mais poderoso de todos os encantamentos.</p>
+          </div>
+        </div>
+      </div>
+      <p class="blank">✍️ [Crie seu próprio encantamento para ela]</p>
+      <div class="chapter-decor-bottom"></div>
+    </div>
+  </section>
+
+  <!-- 🎮 MINI-JOGO -->
+  <section class="game-section">
+    <h2 class="section-title">
+      <span class="title-ornament">✦</span>
+      O Voo Mágico da Fernanda
+      <span class="title-ornament">✦</span>
+    </h2>
+    <p class="game-intro">
+      Ajude o dragoninho a desviar dos livros e pegar as estrelinhas! <br>
+      <strong>Pressione ESPAÇO</strong> (até 3x para pulo triplo!) ou toque na tela. 🐉✨
+    </p>
+
+    <div class="game-wrapper">
+      <canvas id="gameCanvas" width="800" height="300"></canvas>
+      <div class="game-overlay" id="gameOverlay">
+        <p class="game-overlay-title">🐉 Pronto para voar?</p>
+        <p class="game-overlay-text">Aperte ESPAÇO ou toque para começar!</p>
+      </div>
+    </div>
+
+    <div class="game-hud">
+      <div class="game-hud-item">
+        <span class="game-hud-label">🏆 Recorde:</span>
+        <span class="game-hud-value" id="gameHighScore">0</span>
+      </div>
+      <div class="game-hud-item">
+        <span class="game-hud-label">⭐ Pontos:</span>
+        <span class="game-hud-value" id="gameScore">0</span>
+      </div>
+    </div>
+
+    <p class="game-tip">💡 Cada obstáculo = 1 ponto. Cada estrelinha = 5 pontos!</p>
+  </section>
+
+  <!-- 💌 CARTA FINAL -->
+  <section class="final-letter">
+    <div class="letter">
+      <div class="letter-wax-seal">💛</div>
+      <h2>💌 Uma Carta Para Você</h2>
+      <p class="letter-greeting">Querida Fernanda,</p>
+      <p class="blank big">✍️ [Escreva aqui sua mensagem — o quanto ela é especial, o que deseja pra ela, o que ela significa pra você. Deixe o coração falar]</p>
+      <p class="letter-sign">
+        Com todo o meu carinho,<br>
+        <span class="sign-blank">[Seu nome]</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 🎂 FINAL -->
+  <section class="ending">
+    <div class="ending-symbols">
+      <span>🎂</span>
+      <span>✨</span>
+      <span>📖</span>
+      <span>🌿</span>
+      <span>💛</span>
+      <span>🔮</span>
+    </div>
+    <h2 class="ending-title">✨ Feliz Aniversário, Fernanda ✨</h2>
+    <p class="ending-text">Que este novo ano seja tão mágico quanto você. 🍃</p>
+    <button id="magicBtn">✨ Lançar Encantamento ✨</button>
+    <p id="magicMsg"></p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
