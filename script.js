@@ -148,11 +148,6 @@ function pausarFloresta() {
   musicToggle.textContent = '🔇';
 }
 
-// Inicia automaticamente após o primeiro clique do usuário
-document.body.addEventListener('click', function iniciarSom() {
-  if (!soundPlaying) tocarFloresta();
-  document.body.removeEventListener('click', iniciarSom);
-}, { once: true });
 
 // Botão de ligar/desligar
 musicToggle.addEventListener('click', (e) => {
@@ -1033,3 +1028,147 @@ overlay.addEventListener('touchstart', (e) => {
 dino.y = chaoY - dino.height;
 desenharFundo();
 desenharDino();
+
+// ============================
+// 🎬 OVERLAY DE ENTRADA
+// ============================
+const entryOverlay = document.getElementById('entryOverlay');
+const entryBtn = document.getElementById('entryBtn');
+const entryParticles = document.getElementById('entryParticles');
+
+// Cria partículas mágicas caindo no overlay
+function criarParticulasEntrada() {
+  if (!entryParticles) return;
+  const emojis = ['✨', '⭐', '💫', '🌟', '🍃', '🌿', '📖', '🔮'];
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'entry-particle';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.fontSize = (Math.random() * 15 + 12) + 'px';
+    const duracao = Math.random() * 8 + 8;
+    p.style.animationDuration = duracao + 's';
+    p.style.animationDelay = Math.random() * 5 + 's';
+    entryParticles.appendChild(p);
+  }
+}
+criarParticulasEntrada();
+
+// Ao clicar em "Entrar no mundo mágico"
+if (entryBtn) {
+  entryBtn.addEventListener('click', () => {
+    // 1. Toca a música IMEDIATAMENTE (o clique libera o áudio)
+    const forestAmbient = document.getElementById('forestAmbient');
+    const musicToggle = document.getElementById('musicToggle');
+
+    if (forestAmbient && !forestAmbient.paused === false) {
+      forestAmbient.volume = 0;
+      forestAmbient.play().then(() => {
+        // Atualiza o botão de música
+        if (musicToggle) {
+          musicToggle.classList.add('playing');
+          musicToggle.textContent = '🍃';
+        }
+
+        // Fade in suave do volume
+        let vol = 0;
+        const alvo = 0.25;
+        const passos = 40;
+        const inc = alvo / passos;
+        const intervalo = setInterval(() => {
+          vol += inc;
+          if (vol >= alvo) {
+            forestAmbient.volume = alvo;
+            clearInterval(intervalo);
+          } else {
+            forestAmbient.volume = vol;
+          }
+        }, 2500 / passos);
+      }).catch(() => {
+        console.warn('Erro ao tocar som');
+      });
+    }
+
+    // 2. Efeito visual: chuveiro de magia saindo do botão
+    const rect = entryBtn.getBoundingClientRect();
+    const bx = rect.left + rect.width / 2;
+    const by = rect.top + rect.height / 2;
+
+    const emojis = ['✨', '⭐', '💫', '🌟', '🍃', '🌸', '💛'];
+    for (let i = 0; i < 30; i++) {
+      setTimeout(() => {
+        const s = document.createElement('div');
+        s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        s.style.cssText = `
+          position: fixed;
+          left: ${bx}px;
+          top: ${by}px;
+          font-size: ${Math.random() * 15 + 15}px;
+          pointer-events: none;
+          z-index: 100002;
+          filter: drop-shadow(0 0 15px #ffe97a);
+          transition: transform 1.8s ease-out, opacity 1.8s ease-out;
+        `;
+        document.body.appendChild(s);
+
+        requestAnimationFrame(() => {
+          const ang = Math.random() * Math.PI * 2;
+          const dist = 150 + Math.random() * 300;
+          s.style.transform = `translate(${Math.cos(ang) * dist}px, ${Math.sin(ang) * dist}px) scale(0.3) rotate(${Math.random() * 720}deg)`;
+          s.style.opacity = '0';
+        });
+        setTimeout(() => s.remove(), 1900);
+      }, i * 25);
+    }
+
+    // 3. Some o overlay com fade
+    setTimeout(() => {
+      entryOverlay.classList.add('hidden');
+    }, 300);
+
+    // 4. Libera o scroll da página
+    document.body.style.overflow = 'auto';
+
+    // 5. Toca som de "entrada mágica" (Web Audio API)
+    tocarSomEntrada();
+  });
+}
+
+// Bloqueia o scroll enquanto o overlay estiver visível
+document.body.style.overflow = 'hidden';
+
+// Som de "entrada mágica" (arpejo subindo)
+function tocarSomEntrada() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const agora = audioCtx.currentTime;
+    const notas = [523.25, 659.25, 783.99, 1046.5, 1318.51, 1567.98];
+
+    notas.forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, agora + i * 0.1);
+      gain.gain.linearRampToValueAtTime(0.15, agora + i * 0.1 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, agora + i * 0.1 + 0.6);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(agora + i * 0.1);
+      osc.stop(agora + i * 0.1 + 0.6);
+    });
+  } catch (e) {}
+}
+
+// Se a página for recarregada e o usuário já entrou antes, pula o overlay
+if (sessionStorage.getItem('jaEntrou') === 'sim') {
+  entryOverlay.classList.add('hidden');
+  document.body.style.overflow = 'auto';
+}
+
+// Marca que entrou ao clicar
+if (entryBtn) {
+  entryBtn.addEventListener('click', () => {
+    sessionStorage.setItem('jaEntrou', 'sim');
+  });
+}
