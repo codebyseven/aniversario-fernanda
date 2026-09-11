@@ -1177,18 +1177,7 @@ function tocarSomEntrada() {
   } catch (e) {}
 }
 
-// Se a página for recarregada e o usuário já entrou antes, pula o overlay
-if (sessionStorage.getItem('jaEntrou') === 'sim') {
-  entryOverlay.classList.add('hidden');
-  document.body.style.overflow = 'auto';
-}
 
-// Marca que entrou ao clicar
-if (entryBtn) {
-  entryBtn.addEventListener('click', () => {
-    sessionStorage.setItem('jaEntrou', 'sim');
-  });
-}
 
 function criarParticulasEntrada() {
   if (!entryParticles) return;
